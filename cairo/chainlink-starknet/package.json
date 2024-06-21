@@ -1,0 +1,63 @@
+{
+  "name": "chainlink-starknet",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Chainlink's Starknet integration monorepo",
+  "workspaces": [
+    "contracts",
+    "examples/contracts/*",
+    "packages-ts/*"
+  ],
+  "keywords": [
+    "typescript",
+    "cli"
+  ],
+  "main": "packages-ts/starknet-gauntlet-cli/dist/index.js",
+  "bin": "packages-ts/starknet-gauntlet-cli/dist/index.js",
+  "scripts": {
+    "gauntlet": "node ./packages-ts/starknet-gauntlet-cli/dist/index.js",
+    "test": "yarn build && yarn workspaces run test",
+    "test:coverage": "yarn test --collectCoverage",
+    "test:ci": "yarn test --ci",
+    "eslint": "eslint -f json -o eslint-report.json ./packages-ts || true",
+    "lint": "tsc -b ./tsconfig.json",
+    "format": "yarn prettier --write .",
+    "format:check": "yarn prettier --check .",
+    "clean": "tsc -b --clean ./tsconfig.json",
+    "build": "yarn clean && tsc -b ./tsconfig.json",
+    "bundle": "yarn build && pkg . --no-native-build",
+    "release": "yarn changeset publish"
+  },
+  "pkg": {
+    "scripts": [
+      "packages-ts/starknet-gauntlet-cli/dist/index.js"
+    ],
+    "targets": [
+      "linux",
+      "macos"
+    ],
+    "outputPath": "bin",
+    "assets": [
+      "node_modules/@chainlink-dev",
+      "packages-ts/*/contract_artifacts/**/*",
+      "packages-ts/starknet-gauntlet-cli/networks/"
+    ]
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.22.0",
+    "@types/jest": "^28.1.0",
+    "@types/node": "^18.7.11",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint": "^8.49.0",
+    "jest": "^28.1.0",
+    "pkg": "^5.2.1",
+    "prettier": "2.1.1",
+    "ts-jest": "^28.0.7",
+    "ts-node": "^10.8.0",
+    "typescript": "4.7.2"
+  },
+  "dependencies": {
+    "starknet": "6.6.6"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./packages-ts/starknet-gauntlet"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-oz"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-argent"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-multisig"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-example"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-token"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-ocr2"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-emergency-protocol"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-ledger"
+    },
+    {
+      "path": "./packages-ts/starknet-gauntlet-cli"
+    },
+  ]
+}

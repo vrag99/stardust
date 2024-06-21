@@ -59,9 +59,12 @@ mod Vault{
         // Amount of mUSD midnted by user
         mUSDminted: LegacyMap<ContractAddress,u256>,
         // Acceptable Collateral
-        collateral: Array<ContractAddress>,
+        // collateral: Span<ContractAddress>,
         mUSDAddr: ContractAddress,
-        reentrancyGuard: ReentrancyGuardComponent::Storage,
+        //Toatal amount of mUSD/vaule/TVL in platform
+        totalValue: u256,
+        //mapping of collateralToken => Total Value
+        collateralValue: LegacyMap<ContractAddress,u256>,
     }
 
     #[derive(Drop,starknet::event)]
@@ -86,12 +89,12 @@ mod Vault{
 
 
     #[constructor]
-    fn constructor(ref self: ContractState,tokens: Array<ContractAddress>,mUSDAddr:ContractAddress ){
+    fn constructor(ref self: ContractState,tokens: Span<ContractAddress>,mUSDAddr:ContractAddress ){
         self.liquidation_threshold.write(50);
         self.liquidation_bonus.write(10);
         self.liquidation_precision.write(100);
         self.mUSDAddr.write(mUSDAddr);
-        self.collateral.write(tokens);
+        // self.collateral.write(tokens);
     }
 
     #[external(v0)]

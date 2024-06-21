@@ -11,7 +11,8 @@ trait IstarUSD<T>{
 #[starknet::contract]
 mod starUSD{
     use openzeppelin::access::ownable::ownable::OwnableComponent::InternalTrait;
-    use openzeppelin::token::erc20::{ERC20Component, ERC20HooksEmptyImpl};
+    use openzeppelin::token::erc20::{ERC20Component};
+    
     use openzeppelin::access::ownable::OwnableComponent;
 
     use starknet::ContractAddress;

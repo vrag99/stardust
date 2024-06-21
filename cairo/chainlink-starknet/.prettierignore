@@ -1,0 +1,18 @@
+migrations
+tests
+ops
+packages-rs
+target
+*.json
+dist
+*.yml
+typechain-types
+*.html
+*.md
+
+# Vendor files (contracts)
+vendor
+
+# Python virtual env
+.venv
+.direnv

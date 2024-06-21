@@ -5,7 +5,9 @@ edition = "2023_11"
 
 [dependencies]
 starknet = ">=2.6.3"
-openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.13.0" }
+openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.10.0" }
+chainlink = {path="./chainlink-starknet/contracts"}
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.21.0" }
 
 
 [[target.starknet-contract]]

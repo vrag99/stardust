@@ -1,3 +1,12 @@
+use starknet::ContractAddress;
+
+#[starknet::interface]
+trait IstarUSD<T>{
+    fn mint(ref self: T, recipient: ContractAddress, amount: u256);
+    fn burn(ref self: T, amount: u256 , recipient: ContractAddress);
+}
+
+
 #[starknet::contract]
 mod starUSD{
     use openzeppelin::access::ownable::ownable::OwnableComponent::InternalTrait;
@@ -38,15 +47,19 @@ mod starUSD{
         self.erc20.initializer(name, symbol);
     }
 
-    #[external(v0)]
-    fn mint(ref self: ContractState, recipient: ContractAddress, amount: u256) {
-        self.ownable.assert_only_owner();
-        self.erc20._mint(recipient, amount);
+
+    #[abi(embed_v0)]
+    impl starUSD of super::IstarUSD<ContractState>{
+        fn mint(ref self: ContractState, recipient: ContractAddress, amount: u256) {
+            self.ownable.assert_only_owner();
+            self.erc20._mint(recipient, amount);
+        }
+
+        fn burn(ref self: ContractState, amount: u256 , recipient: ContractAddress) {
+            self.ownable.assert_only_owner();
+            self.erc20._burn(recipient,amount);
+        }
     }
 
-    #[external(v0)]
-    fn burn(ref self: ContractState, amount: u256 , recipient: ContractAddress) {
-        self.ownable.assert_only_owner();
-        self.erc20._burn(recipient,amount);
-    }
+
 }

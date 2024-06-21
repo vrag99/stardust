@@ -1,0 +1,9 @@
+cairo/node_modules
+
+cairo/target
+
+cairo/.env
+cairo/.snfoundry_cache
+cairo/.DS_Store
+
+cairo/Scarb.lock

@@ -1,6 +1,8 @@
 import { GradientHeading } from "@/components/ui/gradient-heading";
 import Meteors from "@/components/ui/meteors";
-import ShimmerButton from "@/components/ui/shimmer-button";
+import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
+import { useAccount } from "wagmi";
 
 export default function Home() {
   return (
@@ -26,11 +28,24 @@ export default function Home() {
           StarkNet
         </span>
       </p>
-      <ShimmerButton className="shadow-2xl mt-2" shimmerColor="#a5b4fc">
-        <span className="text-accent-foreground font-medium">
-          Get Started
-        </span>
-      </ShimmerButton>
+      <div className="mt-2">
+        <DynamicWagmiConnector>
+          <DynamicWidget />
+          {/* <AccountInfo /> */}
+        </DynamicWagmiConnector>
+      </div>
+    </div>
+  );
+}
+
+function AccountInfo() {
+  const { address, isConnected, chain } = useAccount();
+
+  return (
+    <div>
+      <p>wagmi connected: {isConnected ? "true" : "false"}</p>
+      <p>wagmi address: {address}</p>
+      <p>wagmi network: {chain?.id}</p>
     </div>
   );
 }

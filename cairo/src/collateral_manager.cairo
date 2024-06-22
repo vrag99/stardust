@@ -14,8 +14,7 @@ pub trait IVault<TContractState>{
 
 #[starknet::interface]
 pub trait ICollateralManager<T>{
-    fn deposit_collateral(ref self:T , contract_address:ContractAddress, amount:u128) -> u128;
-    //have to check the types of the assets and the amount
+    // this defines the collateralization ratio
     fn dynamic_collateralization_ratio(ref self:T,contract_address:ContractAddress ,amount:u128) -> u128;
 }
 
@@ -26,7 +25,6 @@ mod CollateralManager {
     use super::IVaultDispatcher;
     use starknet::{ContractAddress,get_caller_address}; 
     use super::ICollateralManager;
-    const PRECISION:u128 = 1000000000000000000;
     #[storage]
     struct Storage{
         //total collateral deposited
@@ -47,6 +45,9 @@ mod CollateralManager {
         let userBalance = IVaultDispatcher {contract_address}.getAccountCollateralValue(user);
         let contribution = totalValue/userBalance;
         // here this contribution will be used to calculate the collateralization ratio
+        //now it will be sent to the frontend where in the js file , it would be used 
+        // witht the expression 150 * (1+x+x^2/2)/(e^x) to calculate the collateralization ratio
+        // x would be the diffference b/w average collateralization ratio and the contribution
 
         
         return contribution;

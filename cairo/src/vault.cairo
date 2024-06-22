@@ -103,9 +103,14 @@ pub trait IAggregatorPriceConsumer<TContractState> {
 }
 
 #[starknet::interface]
+#[starknet::interface]
 pub trait IVault<TContractState>{
     fn getTotalValue(ref self: TContractState) -> u128;
     fn getAccountCollateralValue(ref self: TContractState, user: ContractAddress) -> u128;
+    
+    
+    
+    
 }
 
 #[starknet::contract]
@@ -151,8 +156,10 @@ use super::StoreContractAddressArray;
         mUSDminted: LegacyMap<ContractAddress,u128>,
         // Acceptable Collateral
         collaterals: Array<ContractAddress>,
+        users: Array<ContractAddress>,
         mUSDAddr: ContractAddress,
-        //Toatal amount of mUSD/vaule/TVL in platform
+        //Total amount of mUSD/vault/TVL in platform
+        //Total amount of mUSD/vault/TVL in platform
         totalValue: u128,
         //mapping of collateralToken => Total Value
         collateralValue: LegacyMap<ContractAddress,u128>,
@@ -289,6 +296,12 @@ use super::StoreContractAddressArray;
             };
             totalValue
         }
+        
+        
+
+        
+        
+
     }
 
 

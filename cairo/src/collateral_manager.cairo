@@ -1,39 +1,62 @@
-// /// This code for the collateral Manger
-// /// It takes in a bucket of assets and send them to the vault of each asset
+/// This code for the collateral Manger
+/// It takes in a bucket of assets and send them to the vault of each asset
 
-// use starknet::{ContractAddress,get_caller_address};
-
-// #[starknet::interface]
-// pub trait ICollateralManager<T>{
-//     fn deposit_collateral(ref self:T , asset:Array<ContractAddress>, amount:Array<u128>) -> u128;
-//     //have to check the types of the assets and the amount
-//     fn dynamic_collateralization_ratio(ref self:T) -> u128;
-// }
+use starknet::{ContractAddress,get_caller_address};
 
 
-// #[starknet::contract]
-// mod CollateralManager {
-//    use starknet::{ContractAddress,get_caller_address}; 
-//     #[storage]
-//     struct Storage{
 
-//     }
-
-//     #[abi(embed_v0)]
-//     Impl CollateralManager of super::ICollateralManager<ContractState> {
-//         fn deposit_collateral(ref self, asset:Array<ContractAddress>, amount:Array<u128>) -> u128{
-//             // let caller = get_caller_address();
-//             // let vault = ContractAddress::new("vault contract address");
-//             // calling the deposit function from the vault contract
+#[starknet::interface]
+pub trait IVault<TContractState>{
+    fn getTotalValue(ref self: TContractState) -> u128;
+    fn getAccountCollateralValue(ref self: TContractState, user: ContractAddress) -> u128;
+}
 
 
-//         fn dynamic_collateralization_ratio()-> u128 {
-//             // let vault = ContractAddress::new("vault contract address");
-//             // call the functions and get the ratio of the contribution of the person 
-//             // calculate this ratio 150 * (k * (1 + x + x^2/2 )/ (e^x) ) where x is the person's contribution - the avg contribution going on , 
-//             // avg contribution will be calculated by the vault contract or can be taken constant 
+#[starknet::interface]
+pub trait ICollateralManager<T>{
+    fn deposit_collateral(ref self:T , contract_address:ContractAddress, amount:u128) -> u128;
+    //have to check the types of the assets and the amount
+    fn dynamic_collateralization_ratio(ref self:T,contract_address:ContractAddress ,amount:u128) -> u128;
+}
 
 
-//         }
+#[starknet::contract]
+mod CollateralManager {
+    use super::IVaultDispatcherTrait;
+    use super::IVaultDispatcher;
+    use starknet::{ContractAddress,get_caller_address}; 
+    use super::ICollateralManager;
+    const PRECISION:u128 = 1000000000000000000;
+    #[storage]
+    struct Storage{
+        //total collateral deposited
+        totalValue: u128,
+        // the collateral deposited by each asset
+        collateralDeposited: LegacyMap<(ContractAddress,ContractAddress),u128>,
+        //will be used to calculate the collateralization ratio
+
+
+    }
+
+    #[external(v0)]
+    fn dynamic_collateralization_ratio(ref self : ContractState,
+         contract_address:ContractAddress,
+         amount:u128,) -> u128{
+        let user = get_caller_address();
+        let totalValue = IVaultDispatcher {contract_address}.getTotalValue();
+        let userBalance = IVaultDispatcher {contract_address}.getAccountCollateralValue(user);
+        let contribution = totalValue/userBalance;
+        // here this contribution will be used to calculate the collateralization ratio
+
+        
+        return contribution;
+        // here this contribution will be used to calculate the collateralization ratio
+        // we cannot perfrom decimal calculations here in starknet as it only supports integers
+
+
+      
+    }
+
     
-// }
+    
+}

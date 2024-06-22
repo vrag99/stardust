@@ -1,7 +1,6 @@
 import { GradientHeading } from "@/components/ui/gradient-heading";
 import Meteors from "@/components/ui/meteors";
 import ShimmerButton from "@/components/ui/shimmer-button";
-import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (

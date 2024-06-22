@@ -103,6 +103,12 @@ pub trait IAggregatorPriceConsumer<TContractState> {
 }
 
 #[starknet::contract]
+pub trait IVault<TContractState>{
+    fn getTotalValue(ref self: TContractState) -> u128;
+    fn getAccountCollateralValue(ref self: TContractState, user: ContractAddress) -> u128;
+}
+
+#[starknet::contract]
 mod Vault{
     use super::StoreContractAddressArray;
     use super::IERC20Dispatcher;
@@ -192,6 +198,7 @@ mod Vault{
         let mUSD = IstarUSDDispatcher { contract_address: self.mUSDAddr.read() };
         mUSD.mint(user,amountMusdMint);
         self.mUSDminted.write(user,self.mUSDminted.read(user)+amountMusdMint);
+        self.totalValue.write(self.totalValue.read()+amountMusdMint);
     }
 
     #[external(v0)]
@@ -226,28 +233,34 @@ mod Vault{
         _burnMUSD(ref self,user,debtToConver);
     }
 
-    #[external(v0)]
-    fn getAccountCollateralValue(
-        ref self: ContractState,
-        user: ContractAddress
-    ) -> u128{
-        let mut totalValue = 0;
-        let mut arr = self.collaterals.read();
-        let user = get_caller_address();
-       loop {
-            match arr.pop_front(){
-                Option::Some(token)=>{
-                    let amount = self.collateralDeposited.read((user,token));
-                    let value = _getUsdValue(ref self,amount,token);
-                    totalValue += value;
-                },
-                Option::None=>{
-                    break;
-                }
+    #[abi(embed_v0)]
+    impl Vault of super::IVault<ContractState> {
+        fn getTotalValue(ref self: ContractState) -> u128{
+            self.totalValue.read()
+        }
+
+        fn getAccountCollateralValue(
+            ref self: ContractState,
+            user: ContractAddress
+        ) -> u128{
+            let mut totalValue = 0;
+            let mut arr = self.collaterals.read();
+            loop {
+                match arr.pop_front(){
+                    Option::Some(token)=>{
+                        let amount = self.collateralDeposited.read((user,token));
+                        let value = _getUsdValue(ref self,amount,token);
+                        totalValue += value;
+                    },
+                    Option::None=>{
+                        break;
+                    }
+                };
             };
-       };
-       totalValue
+            totalValue
+        }
     }
+
 
 
     //TODO: Call Oracle here 
@@ -290,6 +303,7 @@ mod Vault{
         let mUSD = IstarUSDDispatcher { contract_address: self.mUSDAddr.read() };
         mUSD.burn(amount,user);
         self.mUSDminted.write(user,self.mUSDminted.read(user)-amount);
+        self.totalValue.write(self.totalValue.read()-amount);
     }
 
 

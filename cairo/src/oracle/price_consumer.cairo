@@ -12,7 +12,6 @@ mod AggregatorPriceConsumer {
     use chainlink::ocr2::aggregator_proxy::IAggregator;
     use chainlink::ocr2::aggregator_proxy::IAggregatorDispatcher;
     use chainlink::ocr2::aggregator_proxy::IAggregatorDispatcherTrait;
-
     #[storage]
     struct Storage {
         _uptime_feed_address: ContractAddress,

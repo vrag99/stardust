@@ -2,13 +2,14 @@
 name = "stardust"
 version = "0.1.0"
 edition = "2023_11"
+cairo-version= "2.6.3"
 
 [dependencies]
-starknet = ">=2.6.3"
+starknet = "2.6.3"
 openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.10.0" }
 chainlink = {path="./chainlink-starknet/contracts"}
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.21.0" }
-
+alexandria_storage = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
 
 [[target.starknet-contract]]
 casm=true

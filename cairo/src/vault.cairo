@@ -5,67 +5,67 @@ use starknet::{Store, SyscallResult};
 use starknet::storage_access::StorageBaseAddress;
 use starknet::contract_address_const;
 
-// ANCHOR: StorageAccessImpl
-impl StoreContractAddressArray of Store<Array<ContractAddress>> {
-    fn read(address_domain: u32, base: StorageBaseAddress) -> SyscallResult<Array<ContractAddress>> {
-        StoreContractAddressArray::read_at_offset(address_domain, base, 0)
-    }
+// // ANCHOR: StorageAccessImpl
+// impl StoreContractAddressArray of Store<Array<ContractAddress>> {
+//     fn read(address_domain: u32, base: StorageBaseAddress) -> SyscallResult<Array<ContractAddress>> {
+//         StoreContractAddressArray::read_at_offset(address_domain, base, 0)
+//     }
 
-    fn write(
-        address_domain: u32, base: StorageBaseAddress, value: Array<ContractAddress>
-    ) -> SyscallResult<()> {
-        StoreContractAddressArray::write_at_offset(address_domain, base, 0, value)
-    }
+//     fn write(
+//         address_domain: u32, base: StorageBaseAddress, value: Array<ContractAddress>
+//     ) -> SyscallResult<()> {
+//         StoreContractAddressArray::write_at_offset(address_domain, base, 0, value)
+//     }
 
 
-    fn read_at_offset(
-        address_domain: u32, base: StorageBaseAddress, mut offset: u8
-    ) -> SyscallResult<Array<ContractAddress>> {
-        let mut arr: Array<ContractAddress> = array![];
+//     fn read_at_offset(
+//         address_domain: u32, base: StorageBaseAddress, mut offset: u8
+//     ) -> SyscallResult<Array<ContractAddress>> {
+//         let mut arr: Array<ContractAddress> = array![];
 
-        // Read the stored array's length. If the length is greater than 255, the read will fail.
-        let len: u8 = Store::<u8>::read_at_offset(address_domain, base, offset)
-            .expect('Storage Span too large');
-        offset += 1;
+//         // Read the stored array's length. If the length is greater than 255, the read will fail.
+//         let len: u8 = Store::<u8>::read_at_offset(address_domain, base, offset)
+//             .expect('Storage Span too large');
+//         offset += 1;
 
-        // Sequentially read all stored elements and append them to the array.
-        let exit = len + offset;
-        loop {
-            if offset >= exit {
-                break;
-            }
+//         // Sequentially read all stored elements and append them to the array.
+//         let exit = len + offset;
+//         loop {
+//             if offset >= exit {
+//                 break;
+//             }
 
-            let value = Store::<ContractAddress>::read_at_offset(address_domain, base, offset).unwrap();
-            arr.append(value);
-            offset += Store::<ContractAddress>::size();
-        };
+//             let value = Store::<ContractAddress>::read_at_offset(address_domain, base, offset).unwrap();
+//             arr.append(value);
+//             offset += Store::<ContractAddress>::size();
+//         };
 
-        // Return the array.
-        Result::Ok(arr)
-    }
+//         // Return the array.
+//         Result::Ok(arr)
+//     }
 
-    fn write_at_offset(
-        address_domain: u32, base: StorageBaseAddress, mut offset: u8, mut value: Array<ContractAddress>
-    ) -> SyscallResult<()> {
-        // Store the length of the array in the first storage slot.
-        let len: u8 = value.len().try_into().expect('Storage - Span too large');
-        Store::<u8>::write_at_offset(address_domain, base, offset, len).unwrap();
-        offset += 1;
+//     fn write_at_offset(
+//         address_domain: u32, base: StorageBaseAddress, mut offset: u8, mut value: Array<ContractAddress>
+//     ) -> SyscallResult<()> {
+//         // Store the length of the array in the first storage slot.
+//         let len: u8 = value.len().try_into().expect('Storage - Span too large');
+//         Store::<u8>::write_at_offset(address_domain, base, offset, len).unwrap();
+//         offset += 1;
 
-        // Store the array elements sequentially
-        while let Option::Some(element) = value
-            .pop_front() {
-                Store::<ContractAddress>::write_at_offset(address_domain, base, offset, element).unwrap();
-                offset += Store::<ContractAddress>::size();
-            };
+//         // Store the array elements sequentially
+//         while let Option::Some(element) = value
+//             .pop_front() {
+//                 Store::<ContractAddress>::write_at_offset(address_domain, base, offset, element).unwrap();
+//                 offset += Store::<ContractAddress>::size();
+//             };
 
-        Result::Ok(())
-    }
+//         Result::Ok(())
+//     }
 
-    fn size() -> u8 {
-        255 * Store::<ContractAddress>::size()
-    }
-}
+//     fn size() -> u8 {
+//         255 * Store::<ContractAddress>::size()
+//     }
+// }
 
 #[starknet::interface]
 trait IstarUSD<T>{
@@ -115,13 +115,14 @@ pub trait IVault<TContractState>{
 
 #[starknet::contract]
 mod Vault{
+    use starknet::ContractAddress;
+    use core::result::ResultTrait;
     use core::starknet::event::EventEmitter;
-use super::StoreContractAddressArray;
+    use alexandria_storage::{List,ListTrait};
     use super::IERC20Dispatcher;
     use super::IERC20DispatcherTrait;
     use super::IstarUSDDispatcher;
     use super::IstarUSDDispatcherTrait;
-    use starknet::ContractAddress;
     use starknet::get_caller_address;
     use starknet::get_contract_address;
     use super::IAggregatorPriceConsumerDispatcher;
@@ -142,7 +143,6 @@ use super::StoreContractAddressArray;
     component!(
         path: ReentrancyGuardComponent, storage: reentrancy_guard, event: ReentrancyGuardEvent
     );
-
     #[storage]
     struct Storage{
         liquidation_threshold: u128,
@@ -155,8 +155,7 @@ use super::StoreContractAddressArray;
         // Amount of mUSD midnted by user
         mUSDminted: LegacyMap<ContractAddress,u128>,
         // Acceptable Collateral
-        collaterals: Array<ContractAddress>,
-        
+        collaterals: List<ContractAddress>,
         mUSDAddr: ContractAddress,
         //Total amount of mUSD/vault/TVL in platform
         //Total amount of mUSD/vault/TVL in platform
@@ -196,12 +195,14 @@ use super::StoreContractAddressArray;
     }
 
     #[constructor]
-    fn constructor(ref self: ContractState,tokens: Array<ContractAddress>,mUSDAddr:ContractAddress ){
+    fn constructor(ref self: ContractState,tokens:Span<ContractAddress>,mUSDAddr:ContractAddress ){
         self.liquidation_threshold.write(50);
         self.liquidation_bonus.write(10);
         self.liquidation_precision.write(100);
         self.mUSDAddr.write(mUSDAddr);
-        self.collaterals.write(tokens);
+        let mut tokens_list : List<ContractAddress> = self.collaterals.read();
+        assert!(ListTrait::append_span(ref tokens_list,tokens) == Result::Ok(()) , "Failed to append tokens");
+        self.collaterals.write(tokens_list);
     }
 
     #[external(v0)]
@@ -283,7 +284,7 @@ use super::StoreContractAddressArray;
             let mut totalValue = 0;
             let mut arr = self.collaterals.read();
             loop {
-                match arr.pop_front(){
+                match arr.pop_front().unwrap(){
                     Option::Some(token)=>{
                         let amount = self.collateralDeposited.read((user,token));
                         let value = _getUsdValue(ref self,amount,token);

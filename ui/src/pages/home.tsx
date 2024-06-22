@@ -17,7 +17,6 @@ export default function Home() {
         >
           Welcome to
         </GradientHeading>
-        <h1></h1>
         <GradientHeading size={"xxl"} weight={"bold"} variant={"color"}>
           StarDust
         </GradientHeading>
@@ -31,7 +30,6 @@ export default function Home() {
       <div className="mt-2">
         <DynamicWagmiConnector>
           <DynamicWidget />
-          {/* <AccountInfo /> */}
         </DynamicWagmiConnector>
       </div>
     </div>

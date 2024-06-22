@@ -15,7 +15,7 @@ const headingVariants = cva(
         light: "bg-gradient-to-t from-neutral-200 to-neutral-300",
         secondary:
           "bg-gradient-to-t from-primary-foreground to-muted-foreground",
-        color: "bg-gradient-to-tr from-primary-foreground from-10% to-primary to-[200%] animate-gradient",
+        color: "bg-gradient-to-b from-primary-foreground from-[0%] to-primary to-[90%] animate-gradient",
       },
       size: {
         default: "text-2xl sm:text-3xl lg:text-4xl",

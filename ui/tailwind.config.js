@@ -77,6 +77,10 @@ export const theme = {
           opacity: 0,
         },
       },
+      shine: {
+        from: { backgroundPosition: "200% 0" },
+        to: { backgroundPosition: "-200% 0" },
+      },
       animatedgradient: {
         "0%": { backgroundPosition: "0% 50%" },
         "50%": { backgroundPosition: "100% 50%" },
@@ -112,6 +116,7 @@ export const theme = {
       gradient: "animatedgradient 6s ease infinite alternate",
       "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
       slide: "slide var(--speed) ease-in-out infinite alternate",
+      shine: "shine 8s ease-in-out infinite",
     },
   },
 };

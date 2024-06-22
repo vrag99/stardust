@@ -2,6 +2,8 @@ import "./App.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/home";
+import ProtocolDashboard from "@/pages/protocol-dashboard";
+import LiquidityDashboard from "@/pages/liquidity-dashboard";
 
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
@@ -38,6 +40,8 @@ function App() {
             <Router>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/protocol-dashboard" element={<ProtocolDashboard />} />
+                <Route path="/liquidity-dashboard" element={<LiquidityDashboard />} />
               </Routes>
             </Router>
           </QueryClientProvider>

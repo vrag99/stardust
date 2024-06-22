@@ -156,7 +156,7 @@ use super::StoreContractAddressArray;
         mUSDminted: LegacyMap<ContractAddress,u128>,
         // Acceptable Collateral
         collaterals: Array<ContractAddress>,
-        users: Array<ContractAddress>,
+        
         mUSDAddr: ContractAddress,
         //Total amount of mUSD/vault/TVL in platform
         //Total amount of mUSD/vault/TVL in platform

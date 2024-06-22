@@ -8,8 +8,10 @@ function calculate() {
     let avg_contribution=1/avg_contribution;
     let x = act_val - avg_contribution;
     let e = Math.E;
-    let collateralizatin_val = 150 * (1 + k*x + (k*x)**2/2) / (e**(kx))
+    let collateralizatin_val = 150 * (1 + (k*x) + (k*x)**2/2) / (e**(kx))
+    // this formula is derived fomr the poisson approximation of the contributions of users
     console.log(collateralizatin_val);// will give us the current values
     
+
 
 }

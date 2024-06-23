@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/home";
 import ProtocolDashboard from "@/pages/protocol-dashboard";
 import LiquidityDashboard from "@/pages/liquidity-dashboard";
-import ReputationDashboard from "./pages/reputation-dashboard";
+import ReputationDashboard from "@/pages/reputation-dashboard";
 import Dao from "@/pages/dao-interface";
+
+import ProtectedRoute from "@/components/dashboard/protected-route";
 
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
@@ -44,19 +46,21 @@ function App() {
               <Router>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route
-                    path="/protocol-dashboard"
-                    element={<ProtocolDashboard />}
-                  />
-                  <Route
-                    path="/liquidity-dashboard"
-                    element={<LiquidityDashboard />}
-                  />
-                  <Route
-                    path="/reputation-dashboard"
-                    element={<ReputationDashboard />}
-                  />
-                  <Route path="/dao" element={<Dao />} />
+                  <Route path="/" element={<ProtectedRoute />}>
+                    <Route
+                      path="/protocol-dashboard"
+                      element={<ProtocolDashboard />}
+                    />
+                    <Route
+                      path="/liquidity-dashboard"
+                      element={<LiquidityDashboard />}
+                    />
+                    <Route
+                      path="/reputation-dashboard"
+                      element={<ReputationDashboard />}
+                    />
+                    <Route path="/dao" element={<Dao />} />
+                  </Route>
                 </Routes>
               </Router>
             </DynamicWagmiConnector>

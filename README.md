@@ -14,8 +14,8 @@
 <h3 align="center">StardDust</h3>
 
   <p align="center" style="width:76ch;">
-Welcome to Stardust .
-Designed to streamline your operations and finances, StableStore offers a comprehensive suite of tools to manage your storage deals and monitor your performance.</p>
+Welcome to Stardust! We are excited to introduce you to our innovative platform designed to empower decentralized autonomous organizations (DAOs) with seamless liquidity lending and efficient management tools.
+</p>
     <a href="https://stardust.gitbook.io/stardust">View Docs</a>
     ·
     <a href="https://github.com/vrag99/stardust/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
@@ -24,48 +24,99 @@ Designed to streamline your operations and finances, StableStore offers a compre
   </p>
 </div>
 
-## Get Started
-<a href="https://stardust.gitbook.io/stardust"><strong>Explore the docs »</strong></a>
-1.  Clone the repo
-    ```sh
-    git clone https://github.com/Sahilgill24/StableStore.git && cd StableStore
-    ```
-2.  Setup the environment files.
-    ```sh
-    # frontend/ui/.env
-    VITE_BACKEND_URI=http://localhost:8080/api
-    VITE_DATA_BACKEND_URI=http://localhost:3000
-    ```
-    ```sh
-    # services/core/.env.development.local
-    # PORT
-    PORT=8080
-    DATABASE_URL=
+# Get Started
+<a href="https://stardust.gitbook.io/stardust"><strong>Explore the docs for more technical Explanation »</strong></a>
 
-    # TOKEN
+## Key Features of Stardust
 
-    SECRET_KEY=developemtn_secret_key
+### Liquidity Lending Protocol:
 
-    SMTP_HOST=smtp.gmail.com
-    SMTP_PORT=587
-    SMTP_MAIL=
-    SMTP_APP_PASS=
+- **Easy Signup with Dynamic:**
+  - DAOs can easily sign up with Stardust using Dynamic, our user-friendly registration process.
+  
+- **Liquidity Dashboard:**
+  - After signing up, DAOs can request liquidity directly from our intuitive liquidity dashboard.
+  
+- **Submit Request via CSV:**
+  - DAOs can submit their liquidity requests in CSV format, specifying the currencies and amounts they need.
+  
+- **Collateral Calculation and Payment:**
+  - Our advanced algorithms calculate the required collateral. Once the collateral is provided and approved, Argent’s multi-signature keys are set up, giving DAO members secure access to the provided liquidity.
 
-    LOG_FORMAT = dev
-    LOG_DIR = ../logs
+### DAO Management Tools:
 
-    # CORS
+- **Reputation Calculator:**
+  - DAOs can utilize our reputation calculator to evaluate their chances of obtaining a loan. This tool leverages the Voyager API to analyze historical data and generate a reputation score, similar to a credit score.
+  
+- **Threshold-Based Approval:**
+  - Only DAOs with a reputation score above a certain threshold will be approved for liquidity, ensuring a fair and risk-managed lending process.
 
-    ORIGIN = 'http://localhost:5174'
-    CREDENTIALS = true
+### Why Choose Stardust?
 
-    ```
-3. Build and deploy
-    ```sh
-    cd backend && npm i && cd controllers && node apiserver.js && cd ../ # running our API server
-    cd frontend/ui && yarn && yarn dev --port 5174 && cd ../../ # running our frontend 
-    cd services/core && npm i && npm run dev
-    ````
+- **Transparent and Secure:**
+  - Our platform ensures the security of your funds and the transparency of our processes. Multi-signature keys and robust collateral assessments provide peace of mind.
+  
+- **Empowering DAOs:**
+  - Stardust is committed to supporting DAOs by providing the tools they need to manage their liquidity and reputation effectively, allowing them to focus on their core missions.
+  
+- **Innovative and User-Friendly:**
+  - Combining liquidity lending with reputation assessment, Stardust offers a unique, innovative, and user-friendly approach to DAO management.
+
+
+
+# Internals of Stardust
+
+Welcome to the Internals page of Stardust, where we delve into the technical workings of our project. Here's a comprehensive overview of how Stardust operates behind the scenes:
+
+<br />
+<img src="/ui/images/5.jpeg ">
+<br/>
+<img src="/ui/images/6.jpeg ">
+
+
+- **Frontend Development:**
+  - Built using React and Vite for a fast and responsive UI.
+  - Enables easy navigation, signups, wallet management, and dashboard access for DAOs.
+
+- **User Signup with Dynamic:**
+  - Seamless and secure registration process for DAOs using Dynamic.
+  - Users can select their wallets post-registration.
+
+- **Wallet Management with Argent:**
+  - Integration of Argent's multi-signature wallet setup for secure management.
+  - Cairo contracts for multi-sig wallets located in the server folder.
+
+- **Smart Contracts:**
+  - Essential backend components written in Cairo for managing Stardust.
+  - Includes:
+    - Collateral Manager: Manages DAO collateral for liquidity.
+    - Vault: Storage and management of platform assets.
+    - Stable Coin: Contract for the platform’s stablecoin transactions.
+    - Staking Rewards Token: Manages rewards tokens for staking.
+    - DAO Factory: Creates and manages new DAOs on the platform.
+    - Pool Manager: Oversees liquidity pools for efficient management.
+    - Auction File: Manages auction mechanisms including collateral liquidation.
+    - Governance File: Handles governance mechanisms of the platform.
+
+- **Interaction with Frontend:**
+  - Real-time data interaction between smart contracts and frontend.
+  - Examples include Liquidity Provider Dashboard, Credit Score Dashboard, and Governance Dashboard using Voyage API for transparency.
+
+- **Detailed Contract Descriptions:**
+  - In-depth explanations of major contracts used within Stardust.
+  
+By leveraging these technologies and contracts, Stardust ensures a secure, efficient, and user-friendly experience for DAOs. This integrated approach allows us to provide a comprehensive liquidity lending and DAO management solution.
+
+# Mathematical explanation
+
+<img src="/ui/images/1.jpeg ">
+<br />
+<img src="/ui/images/2.jpeg ">
+<br />
+<img src="/ui/images/3.jpeg ">
+<br />
+<img src="/ui/images/4.jpeg ">
+<br />
 
 <!-- LICENSE -->
 

@@ -8,3 +8,5 @@ cairo/.DS_Store
 
 cairo/Scarb.lock
 /.vscode
+/calculations/.env
+/calculations/node_modules

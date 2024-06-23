@@ -1,4 +1,6 @@
 // these both will come to use from the contracts 
+// will be given to the frontend 
+// wallet ka dekhke inko krna hai sort 
 let value;
 let avg_contribution;
 let k; // constant for proper valuation

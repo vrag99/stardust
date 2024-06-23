@@ -1,14 +1,20 @@
 const express = require('express');
 const axios = require('axios');
+const calculate = require('./calculate');
 dotenv.config();
 
 
 const app = express();
 const url = ""
 
-app.get('/api/v1/calculate', async (req, res) => { });
+app.get('/calculate', async (req, res) => {
+
+ });
+
+app.get('/calculate/dc', async (req, res) => {
 
 
+});
 
 
 

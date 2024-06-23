@@ -2,7 +2,7 @@ import "./App.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/home";
-import ProtocolDashboard from "@/pages/protocol-dashboard";
+import GovernanceDashboard from "@/pages/governance-dashboard";
 import LiquidityDashboard from "@/pages/liquidity-dashboard";
 import ReputationDashboard from "@/pages/reputation-dashboard";
 import Dao from "@/pages/dao-interface";
@@ -48,8 +48,8 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/" element={<ProtectedRoute />}>
                     <Route
-                      path="/protocol-dashboard"
-                      element={<ProtocolDashboard />}
+                      path="/governance-dashboard"
+                      element={<GovernanceDashboard />}
                     />
                     <Route
                       path="/liquidity-dashboard"

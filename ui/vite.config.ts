@@ -4,6 +4,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    exclude: ['js-big-decimal']
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),

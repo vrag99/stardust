@@ -15,8 +15,8 @@ interface navItem {
 export default function NavBar() {
   const { setShowDynamicUserProfile } = useDynamicContext();
   const navItems: navItem[] = [
-    { name: "Protocol", link: "/protocol-dashboard" },
     { name: "Liquidity", link: "/liquidity-dashboard" },
+    { name: "Governance", link: "/governance-dashboard" },
     { name: "Reputation", link: "/reputation-dashboard" },
   ];
   return (

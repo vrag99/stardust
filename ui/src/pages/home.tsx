@@ -26,7 +26,7 @@ export default function Home() {
         </GradientHeading>
       </div>
       <p className="text-sm md:text-lg text-muted-foreground text-center w-[32ch] leading-6">
-        A revolutionary interoperable DeFi Lending Mesh made for{" "}
+        A Liquidity lending protocol to empower DAO's{" "}
         <span className="font-display text-foreground font-medium">
           StarkNet
         </span>

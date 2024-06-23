@@ -24,6 +24,10 @@ Welcome to Stardust! We are excited to introduce you to our innovative platform 
   </p>
 </div>
 
+<img src="/ui/images/7.jpeg">
+<br/>
+
+
 # Get Started
 <a href="https://stardust.gitbook.io/stardust"><strong>Explore the docs for more technical Explanation »</strong></a>
 
@@ -106,7 +110,7 @@ By leveraging these technologies and contracts, Stardust ensures a secure, effic
 
 # Mathematical explanation
 
-explanation of dynamic collateralization used on our platform 
+Explanation of dynamic collateralization used on our platform 
 
 <img src="/ui/images/1.jpeg ">
 <br />
@@ -116,6 +120,10 @@ explanation of dynamic collateralization used on our platform
 <br />
 <img src="/ui/images/4.jpeg ">
 <br />
+
+After plotting the curve on desmos it looks something like this and here we can see the movement of the curve , we can adjust this by using any constant as normalization factor 
+<br/>
+<img src="/ui/images/image.png">
 
 <!-- LICENSE -->
 

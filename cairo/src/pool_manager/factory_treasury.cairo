@@ -10,7 +10,7 @@ pub trait IDaoFactory<TContractState> {
 }
 
 #[starknet::contract]
-pub mod CounterFactory {
+pub mod DaoFactory {
     use starknet::{ContractAddress, ClassHash, SyscallResultTrait, syscalls::deploy_syscall};
 
     #[storage]
@@ -27,7 +27,7 @@ pub mod CounterFactory {
     }
 
     #[abi(embed_v0)]
-    impl Factory of super::ICounterFactory<ContractState> {
+    impl DaoFactory of super::IDaoFactory<ContractState> {
         // ANCHOR: deploy
         fn create_dao(ref self: ContractState, init_value: ContractAddress) -> ContractAddress {
             // Contructor arguments
@@ -43,8 +43,8 @@ pub mod CounterFactory {
         }
 
 
-        fn update_class_hash(ref self: ContractState, counter_class_hash: ClassHash) {
-            self.class_hash.write(counter_class_hash);
+        fn update_class_hash(ref self: ContractState, class_hash: ClassHash) {
+            self.class_hash.write(class_hash);
         }
     }
 }

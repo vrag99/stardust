@@ -43,7 +43,7 @@ pub mod Dao{
     #[external(v0)]
     fn add_signers(ref self:ContractState, signer_to_add:felt252 ) {
         let multisig = self.multisig.read();
-        let signer_to_add: felt252 = 3376183409820967487218811821902436201925151954904615748218292610642950160747;
+        // let signer_to_add: felt252 = 3376183409820967487218811821902436201925151954904615748218292610642950160747;
         let signer_to_add = starknet_signer_from_pubkey(signer_to_add);
         let mut dispatcher = IstardustMultisigDispatcher{contract_address:multisig};
         let mut a  = ArrayTrait::new();
@@ -64,14 +64,20 @@ pub mod Dao{
     }
 
     #[external(v0)]
-    fn remove_signers(ref self: ContractState, new_threshold: u32, signers_to_remove: Array<felt252>) {
+    fn remove_signers(ref self: ContractState, new_threshold: u32, signers_to_remove:  Array<felt252>) {
         let multisig = self.multisig.read();
         let mut dispatcher = IstardustMultisigDispatcher { contract_address: multisig };
         let mut signers = ArrayTrait::new();
-        for signer in signers_to_remove {
-            let signer_converted = starknet_signer_from_pubkey(signer);
-            signers.append(signer_converted);
-        }
+        loop {
+                match signers.pop_front().unwrap(){
+                    Option::Some(val)=>{
+                        signers.append(val);
+                    },
+                    Option::None=>{
+                        break;
+                    }
+                };
+            };
         dispatcher.remove_signers(new_threshold, signers);
     }
 

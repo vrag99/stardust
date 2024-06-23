@@ -11,10 +11,10 @@
     <img src="/ui/src/assets/logo.jpeg" alt="Logo" width="100" height="100">
   </a>
 
-<h3 align="center">StardDust</h3>
+<h1 align="center">StardDust</h3>
 
   <p align="center" style="width:76ch;">
-Welcome to Stardust! We are excited to introduce you to our innovative platform designed to empower decentralized autonomous organizations (DAOs) with seamless liquidity lending and efficient management tools.
+Welcome to Stardust! We are excited to introduce you to our innovative platform designed to empower decentralized autonomous organizations (DAOs) with seamless liquidity lending and efficient management tools. 
 </p>
     <a href="https://stardust.gitbook.io/stardust">View Docs</a>
     ·
@@ -36,9 +36,6 @@ Welcome to Stardust! We are excited to introduce you to our innovative platform 
   
 - **Liquidity Dashboard:**
   - After signing up, DAOs can request liquidity directly from our intuitive liquidity dashboard.
-  
-- **Submit Request via CSV:**
-  - DAOs can submit their liquidity requests in CSV format, specifying the currencies and amounts they need.
   
 - **Collateral Calculation and Payment:**
   - Our advanced algorithms calculate the required collateral. Once the collateral is provided and approved, Argent’s multi-signature keys are set up, giving DAO members secure access to the provided liquidity.
@@ -109,6 +106,8 @@ By leveraging these technologies and contracts, Stardust ensures a secure, effic
 
 # Mathematical explanation
 
+explanation of dynamic collateralization used on our platform 
+
 <img src="/ui/images/1.jpeg ">
 <br />
 <img src="/ui/images/2.jpeg ">
@@ -128,16 +127,16 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/Sahilgill24/StableStore.svg?style=for-the-badge
-[contributors-url]: https://github.com/Sahilgill24/StableStore/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Sahilgill24/StableStore.svg?style=for-the-badge
-[forks-url]: https://github.com/Sahilgill24/StableStore/network/members
-[stars-shield]: https://img.shields.io/github/stars/Sahilgill24/StableStore.svg?style=for-the-badge
-[stars-url]: https://github.com/Sahilgill24/StableStore/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Sahilgill24/StableStore.svg?style=for-the-badge
-[issues-url]: https://github.com/Sahilgill24/StableStore/issues
-[license-shield]: https://img.shields.io/github/license/Sahilgill24/StableStore.svg?style=for-the-badge
-[license-url]: https://github.com/Sahilgill24/StableStore/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/vrag99/stardust.svg?style=for-the-badge
+[contributors-url]: https://github.com/vrag99/stardust/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/vrag99/stardust.svg?style=for-the-badge
+[forks-url]: https://github.com/vrag99/stardust/network/members
+[stars-shield]: https://img.shields.io/github/stars/vrag99/stardust.svg?style=for-the-badge
+[stars-url]: https://github.com/vrag99/stardust/stargazers
+[issues-shield]: https://img.shields.io/github/issues/vrag99/stardust.svg?style=for-the-badge
+[issues-url]: https://github.com/vrag99/stardust/issues
+[license-shield]: https://img.shields.io/github/license/vrag99/stardust.svg?style=for-the-badge
+[license-url]: https://github.com/vrag99/stardust/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/image.png

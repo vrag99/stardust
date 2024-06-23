@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/home";
 import ProtocolDashboard from "@/pages/protocol-dashboard";
 import LiquidityDashboard from "@/pages/liquidity-dashboard";
-
+import Dao from "./pages/dao-interface";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { StarknetWalletConnectors } from "@dynamic-labs/starknet";
@@ -42,6 +42,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/protocol-dashboard" element={<ProtocolDashboard />} />
                 <Route path="/liquidity-dashboard" element={<LiquidityDashboard />} />
+                <Route path="/dao" element={<Dao />} />
               </Routes>
             </Router>
           </QueryClientProvider>

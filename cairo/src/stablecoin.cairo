@@ -1,1 +1,1 @@
-mod stablecoin;
+pub mod stablecoin;

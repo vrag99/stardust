@@ -1,5 +1,5 @@
 #[starknet::contract]
-mod AccessController {
+pub mod AccessController {
     use starknet::ContractAddress;
     use starknet::class_hash::ClassHash;
 
@@ -31,7 +31,7 @@ mod AccessController {
     }
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         #[substorage(v0)]
         ownable: OwnableComponent::Storage,
         #[substorage(v0)]

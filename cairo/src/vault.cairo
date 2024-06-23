@@ -68,14 +68,14 @@ use starknet::contract_address_const;
 // }
 
 #[starknet::interface]
-trait IstarUSD<T>{
+pub trait IstarUSD<T>{
     fn mint(ref self: T, recipient: ContractAddress, amount: u128);
     fn burn(ref self: T, amount: u128 , recipient: ContractAddress);
 }
 
 
 #[starknet::interface]
-trait IERC20<TContractState> {
+pub trait IERC20<TContractState> {
     fn name(self: @TContractState) -> felt252;
 
     fn symbol(self: @TContractState) -> felt252;
@@ -107,14 +107,11 @@ pub trait IAggregatorPriceConsumer<TContractState> {
 pub trait IVault<TContractState>{
     fn getTotalValue(ref self: TContractState) -> u128;
     fn getAccountCollateralValue(ref self: TContractState, user: ContractAddress) -> u128;
-    
-    
-    
-    
+
 }
 
 #[starknet::contract]
-mod Vault{
+pub mod Vault{
     use starknet::ContractAddress;
     use core::result::ResultTrait;
     use core::starknet::event::EventEmitter;
@@ -144,7 +141,7 @@ mod Vault{
         path: ReentrancyGuardComponent, storage: reentrancy_guard, event: ReentrancyGuardEvent
     );
     #[storage]
-    struct Storage{
+    pub struct Storage{
         liquidation_threshold: u128,
         liquidation_bonus: u128,
         liquidation_precision: u128,
@@ -177,7 +174,7 @@ mod Vault{
     }
 
     #[derive(Drop,starknet::Event)]
-    struct CollateralDeposit{
+    pub struct CollateralDeposit{
         #[key]
         user: ContractAddress,
         #[key]  
@@ -186,7 +183,7 @@ mod Vault{
     }
 
     #[derive(Drop,starknet::Event)]
-    struct CollateralRedeemed{
+    pub struct CollateralRedeemed{
         #[key]
         user: ContractAddress,
         #[key]
@@ -254,22 +251,22 @@ mod Vault{
         self.reentrancy_guard.end();
     }
 
-    // // The erc20 token which is used to make the contract solvent again prority order -> eth > usdc > strk
-    // #[external(v0)]
-    // fn liquidateInVault(
-    //     ref self: ContractState,
-    //     collateralToken: ContractAddress,
-    //     debtToConver: u128
-    // ){
-    //     let amount = _getAmontFromUsd(ref self,debtToConver,collateralToken);
-    //     let user = get_caller_address();
-    //     let bonus_collateral = (amount * (self.liquidation_bonus.read()))/ self.liquidation_precision.read();
-    //     _reedemCollateral(ref self,user,collateralToken,amount+bonus_collateral);
-    //     let erc20 = IERC20Dispatcher { contract_address: collateralToken };
-    //     let success = erc20.transfer(user,amount);
-    //     assert!(success,"Transfer failed");
-    //     _burnMUSD(ref self,user,debtToConver);
-    // }
+     // The erc20 token which is used to make the contract solvent again prority order -> eth > usdc > strk
+     #[external(v0)]
+     fn liquidateInVault(
+         ref self: ContractState,
+        collateralToken: ContractAddress,
+        debtToConver: u128
+    ){
+        let amount = _getAmontFromUsd(ref self,debtToConver,collateralToken);
+        let user = get_caller_address();
+        let bonus_collateral = (amount * (self.liquidation_bonus.read()))/ self.liquidation_precision.read();
+        _reedemCollateral(ref self,user,collateralToken,amount+bonus_collateral);
+        let erc20 = IERC20Dispatcher { contract_address: collateralToken };
+        let success = erc20.transfer(user,amount);
+        assert!(success,"Transfer failed");
+        _burnMUSD(ref self,user,debtToConver);
+     }
 
     #[abi(embed_v0)]
     impl Vault of super::IVault<ContractState> {
@@ -297,12 +294,6 @@ mod Vault{
             };
             totalValue
         }
-        
-        
-
-        
-        
-
     }
 
 

@@ -3,18 +3,18 @@ use starknet::class_hash::ClassHash;
 // TODO: drop for OZ upgradeable
 
 #[starknet::interface]
-trait IUpgradeable<TContractState> {
+pub trait IUpgradeable<TContractState> {
     // note: any contract that uses this module will have a mutable reference to contract state
     fn upgrade(ref self: TContractState, new_impl: ClassHash);
 }
 
 #[derive(Drop, starknet::Event)]
-struct Upgraded {
+pub struct Upgraded {
     #[key]
     new_impl: ClassHash
 }
 
-mod Upgradeable {
+pub mod Upgradeable {
     use zeroable::Zeroable;
 
     use starknet::SyscallResult;

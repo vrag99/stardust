@@ -1,7 +1,7 @@
 use starknet::ContractAddress;
 
 #[derive(Copy, Drop, Serde, PartialEq, starknet::Store)]
-struct Round {
+pub struct Round {
     // used as u128 internally, but necessary for phase-prefixed round ids as returned by proxy
     round_id: felt252,
     answer: u128,
@@ -11,7 +11,7 @@ struct Round {
 }
 
 #[derive(Copy, Drop, Serde, starknet::Store)]
-struct Transmission {
+pub struct Transmission {
     answer: u128,
     block_num: u64,
     observation_timestamp: u64,
@@ -58,7 +58,7 @@ struct Transmission {
 // }
 
 #[starknet::interface]
-trait IAggregator<TContractState> {
+pub trait IAggregator<TContractState> {
     fn latest_round_data(self: @TContractState) -> Round;
     fn round_data(self: @TContractState, round_id: u128) -> Round;
     fn description(self: @TContractState) -> felt252;
@@ -67,7 +67,7 @@ trait IAggregator<TContractState> {
 }
 
 #[derive(Copy, Drop, Serde)]
-struct OracleConfig {
+pub struct OracleConfig {
     signer: felt252,
     transmitter: ContractAddress,
 }
@@ -81,7 +81,7 @@ impl OracleConfigLegacyHash of LegacyHash<OracleConfig> {
 }
 
 #[starknet::interface]
-trait Configuration<TContractState> {
+pub trait Configuration<TContractState> {
     fn set_config(
         ref self: TContractState,
         oracles: Array<OracleConfig>,
@@ -97,7 +97,7 @@ trait Configuration<TContractState> {
 use Aggregator::{BillingConfig, BillingConfigSerde};
 
 #[starknet::interface]
-trait Billing<TContractState> {
+pub trait Billing<TContractState> {
     fn set_billing_access_controller(ref self: TContractState, access_controller: ContractAddress);
     fn set_billing(ref self: TContractState, config: Aggregator::BillingConfig);
     fn billing(self: @TContractState) -> Aggregator::BillingConfig;
@@ -114,13 +114,13 @@ trait Billing<TContractState> {
 }
 
 #[derive(Copy, Drop, Serde)]
-struct PayeeConfig {
+pub struct PayeeConfig {
     transmitter: ContractAddress,
     payee: ContractAddress,
 }
 
 #[starknet::interface]
-trait PayeeManagement<TContractState> {
+pub trait PayeeManagement<TContractState> {
     fn set_payees(ref self: TContractState, payees: Array<PayeeConfig>);
     fn transfer_payeeship(
         ref self: TContractState, transmitter: ContractAddress, proposed: ContractAddress
@@ -169,7 +169,7 @@ impl SpanLegacyHash<T, impl THash: LegacyHash<T>, impl TCopy: Copy<T>> of Legacy
 }
 
 #[starknet::contract]
-mod Aggregator {
+pub mod Aggregator {
     use super::Round;
     use super::{Transmission};
     use super::SpanLegacyHash;
@@ -244,7 +244,7 @@ mod Aggregator {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct NewTransmission {
+    pub struct NewTransmission {
         #[key]
         round_id: u128,
         answer: u128,
@@ -261,7 +261,7 @@ mod Aggregator {
     }
 
     #[derive(Copy, Drop, Serde, starknet::Store)]
-    struct Oracle {
+    pub struct Oracle {
         index: usize,
         // entire supply of LINK always fits into u96, so u128 is safe to use
         payment_juels: u128,
@@ -288,7 +288,7 @@ mod Aggregator {
     // }
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         #[substorage(v0)]
         ownable: OwnableComponent::Storage,
         #[substorage(v0)]
@@ -427,7 +427,7 @@ mod Aggregator {
     // --- Configuration
 
     #[derive(Drop, starknet::Event)]
-    struct ConfigSet {
+    pub struct ConfigSet {
         #[key]
         previous_config_block_number: u64,
         #[key]
@@ -646,14 +646,14 @@ mod Aggregator {
     // --- Transmission ---
 
     #[derive(Copy, Drop, Serde)]
-    struct Signature {
+    pub struct Signature {
         r: felt252,
         s: felt252,
         public_key: felt252,
     }
 
     #[derive(Copy, Drop, Serde)]
-    struct ReportContext {
+    pub struct ReportContext {
         config_digest: felt252,
         epoch_and_round: u64,
         extra_hash: felt252,
@@ -849,7 +849,7 @@ mod Aggregator {
     // --- Billing Config
 
     #[derive(Copy, Drop, Serde, starknet::Store)]
-    struct BillingConfig {
+    pub struct BillingConfig {
         observation_payment_gjuels: u32,
         transmission_payment_gjuels: u32,
         gas_base: u32,
@@ -859,7 +859,7 @@ mod Aggregator {
     // --- Billing Access Controller
 
     #[derive(Drop, starknet::Event)]
-    struct BillingAccessControllerSet {
+    pub struct BillingAccessControllerSet {
         #[key]
         old_controller: ContractAddress,
         #[key]
@@ -867,12 +867,12 @@ mod Aggregator {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct BillingSet {
+    pub struct BillingSet {
         config: BillingConfig
     }
 
     #[derive(Drop, starknet::Event)]
-    struct OraclePaid {
+    pub struct OraclePaid {
         #[key]
         transmitter: ContractAddress,
         payee: ContractAddress,
@@ -881,7 +881,7 @@ mod Aggregator {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct LinkTokenSet {
+    pub struct LinkTokenSet {
         #[key]
         old_link_token: ContractAddress,
         #[key]
@@ -1166,7 +1166,7 @@ mod Aggregator {
     use super::PayeeConfig;
 
     #[derive(Drop, starknet::Event)]
-    struct PayeeshipTransferRequested {
+    pub struct PayeeshipTransferRequested {
         #[key]
         transmitter: ContractAddress,
         #[key]
@@ -1176,7 +1176,7 @@ mod Aggregator {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct PayeeshipTransferred {
+    pub struct PayeeshipTransferred {
         #[key]
         transmitter: ContractAddress,
         #[key]

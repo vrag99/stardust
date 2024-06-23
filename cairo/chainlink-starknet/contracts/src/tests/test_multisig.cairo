@@ -18,11 +18,11 @@ use chainlink::multisig::Multisig::{MultisigImpl, UpgradeableImpl};
 use chainlink::multisig::{IMultisigDispatcher};
 
 #[starknet::contract]
-mod MultisigTest {
+pub mod MultisigTest {
     use array::ArrayTrait;
 
     #[storage]
-    struct Storage {}
+    pub struct Storage {}
 
     #[abi(per_item)]
     #[generate_trait]

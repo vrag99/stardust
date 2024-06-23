@@ -2,13 +2,13 @@ use starknet::ContractAddress;
 
 // https://github.com/starknet-io/starkgate-contracts/blob/v2.0/src/cairo/mintable_token_interface.cairo
 #[starknet::interface]
-trait IMintableToken<TContractState> {
+pub trait IMintableToken<TContractState> {
     fn permissioned_mint(ref self: TContractState, account: ContractAddress, amount: u256);
     fn permissioned_burn(ref self: TContractState, account: ContractAddress, amount: u256);
 }
 
 #[starknet::contract]
-mod LinkToken {
+pub mod LinkToken {
     use starknet::ContractAddress;
     use starknet::class_hash::ClassHash;
 
@@ -41,7 +41,7 @@ mod LinkToken {
     impl ERC677Impl = ERC677Component::ERC677Impl<ContractState>;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         #[substorage(v0)]
         ownable: OwnableComponent::Storage,
         _minter: ContractAddress,

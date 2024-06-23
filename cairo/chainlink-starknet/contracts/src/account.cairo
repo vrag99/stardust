@@ -7,7 +7,7 @@
 ///
 /// OpenZeppelin's basic account which can change its public key and declare, deploy, or call contracts.
 #[starknet::contract(account)]
-mod Account {
+pub mod Account {
     use openzeppelin::account::AccountComponent;
     use openzeppelin::introspection::src5::SRC5Component;
 
@@ -34,7 +34,7 @@ mod Account {
     impl SRC5Impl = SRC5Component::SRC5Impl<ContractState>;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         #[substorage(v0)]
         account: AccountComponent::Storage,
         #[substorage(v0)]

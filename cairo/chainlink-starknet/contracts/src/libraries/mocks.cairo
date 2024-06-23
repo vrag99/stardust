@@ -1,2 +1,2 @@
-mod mock_upgradeable;
-mod mock_non_upgradeable;
+pub mod mock_upgradeable;
+pub mod mock_non_upgradeable;

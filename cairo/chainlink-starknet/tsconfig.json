@@ -10,7 +10,7 @@
       "path": "./packages-ts/starknet-gauntlet-oz"
     },
     {
-      "path": "./packages-ts/starknet-gauntlet-argent"
+      "path": "./packages-ts/starknet-gauntlet-stardust"
     },
     {
       "path": "./packages-ts/starknet-gauntlet-multisig"

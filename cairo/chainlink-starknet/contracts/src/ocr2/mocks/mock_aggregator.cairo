@@ -1,5 +1,5 @@
 #[starknet::interface]
-trait IMockAggregator<TContractState> {
+pub trait IMockAggregator<TContractState> {
     fn set_latest_round_data(
         ref self: TContractState,
         answer: u128,
@@ -10,7 +10,7 @@ trait IMockAggregator<TContractState> {
 }
 
 #[starknet::contract]
-mod MockAggregator {
+pub mod MockAggregator {
     use array::ArrayTrait;
     use starknet::contract_address_const;
     use traits::Into;
@@ -24,7 +24,7 @@ mod MockAggregator {
     use chainlink::ocr2::aggregator::Aggregator::Event;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _transmissions: LegacyMap<u128, Transmission>,
         _latest_aggregator_round_id: u128,
         _decimals: u8

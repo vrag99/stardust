@@ -1,1 +1,1 @@
-mod mock_aggregator;
+pub mod mock_aggregator;

@@ -13,7 +13,7 @@ import "../../vendor/starkware-libs/cairo-lang/src/starkware/starknet/solidity/I
 contract StarknetValidator is TypeAndVersionInterface, AggregatorValidatorInterface, SimpleWriteAccessController {
   // Config for L1 -> L2 message cost approximation
   // Message Cost = gasAdjustment * gasEstimate * gasPriceL1Feed / 100
-  struct GasConfig {
+  pub struct GasConfig {
     // gas units derived from starknet estimate_message_fee
     // recommended value is 17300 at time of writing
     uint256 gasEstimate;

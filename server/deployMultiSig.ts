@@ -10,7 +10,7 @@ import {buf2bigint , hex2buf} from './bytes'
 export async function deployMultisigWallet(pk:string) :Promise<ReturnParams>  {
     console.log("Deploying new multisig");
 
-    const deployKeys =  [new EstimateStarknetKeyPair(buf2bigint(hex2buf(pk)))]
+    const deployKeys =  [new StarknetKeyPair("0x008f86dd2b7ee73980fe6bb17c24fe3dcaa9d6a9ef03ce31e3b4b0db5a4bb07a")]
 
 
     const { account, accountContract, keys } = await deployMultisig({

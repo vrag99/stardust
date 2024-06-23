@@ -1,13 +1,13 @@
 // All modules must be present here
 
-mod account;
-mod ocr2;
-mod libraries;
-mod utils;
-mod emergency;
-mod multisig;
-mod token;
-mod access_control;
+pub mod account;
+pub mod ocr2;
+pub mod libraries;
+pub mod utils;
+pub mod emergency;
+pub mod multisig;
+pub mod token;
+pub mod access_control;
 
 #[cfg(test)]
-mod tests;
+pub mod tests;

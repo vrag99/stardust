@@ -1,13 +1,13 @@
 use starknet::EthAddress;
 
 #[starknet::interface]
-trait ISequencerUptimeFeed<TContractState> {
+pub trait ISequencerUptimeFeed<TContractState> {
     fn l1_sender(self: @TContractState) -> EthAddress;
     fn set_l1_sender(ref self: TContractState, address: EthAddress);
 }
 
 #[starknet::contract]
-mod SequencerUptimeFeed {
+pub mod SequencerUptimeFeed {
     use starknet::EthAddress;
     use starknet::EthAddressSerde;
     use starknet::EthAddressIntoFelt252;
@@ -50,7 +50,7 @@ mod SequencerUptimeFeed {
     impl AccessControlInternalImpl = AccessControlComponent::InternalImpl<ContractState>;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         #[substorage(v0)]
         ownable: OwnableComponent::Storage,
         #[substorage(v0)]
@@ -77,14 +77,14 @@ mod SequencerUptimeFeed {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct RoundUpdated {
+    pub struct RoundUpdated {
         status: u128,
         #[key]
         updated_at: u64
     }
 
     #[derive(Drop, starknet::Event)]
-    struct NewRound {
+    pub struct NewRound {
         #[key]
         round_id: u128,
         #[key]
@@ -93,7 +93,7 @@ mod SequencerUptimeFeed {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct AnswerUpdated {
+    pub struct AnswerUpdated {
         current: u128,
         #[key]
         round_id: u128,
@@ -102,7 +102,7 @@ mod SequencerUptimeFeed {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct UpdateIgnored {
+    pub struct UpdateIgnored {
         latest_status: u128,
         #[key]
         latest_timestamp: u64,
@@ -112,7 +112,7 @@ mod SequencerUptimeFeed {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct L1SenderTransferred {
+    pub struct L1SenderTransferred {
         #[key]
         from_address: EthAddress,
         #[key]

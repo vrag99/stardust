@@ -229,7 +229,7 @@ test-examples:
 test-integration-gauntlet: build-ts env-devnet-hardhat
 	cd packages-ts/starknet-gauntlet/ && \
 		yarn test
-	cd packages-ts/starknet-gauntlet-argent/ && \
+	cd packages-ts/starknet-gauntlet-stardust/ && \
 		yarn test
 	cd packages-ts/starknet-gauntlet-cli/ && \
 		yarn test

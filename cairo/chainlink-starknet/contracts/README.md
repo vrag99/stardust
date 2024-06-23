@@ -132,7 +132,7 @@ this configuration and especially [Abdel](https://github.com/abdelhamidbakhta) f
 
 ## Other templates
 
-- [ArgentX template](https://github.com/argentlabs/starknet-build/tree/main/cairo1.0) is built as a fork of the compiler
+- [stardustX template](https://github.com/stardustlabs/starknet-build/tree/main/cairo1.0) is built as a fork of the compiler
 - [Eni's cairo1-template](https://github.com/msaug/cairo1-template) uses git submodules for installation
 - [Shramee's Starklings](https://github.com/shramee/starklings-cairo1) use the cairo1 crates as libraries and builds its own framework
 

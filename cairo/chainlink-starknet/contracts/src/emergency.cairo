@@ -1,1 +1,1 @@
-mod sequencer_uptime_feed;
+pub mod sequencer_uptime_feed;

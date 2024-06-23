@@ -6,6 +6,9 @@ cairo/.env
 cairo/.snfoundry_cache
 cairo/.DS_Store
 
+server/node_modules
+
+
 cairo/Scarb.lock
 /.vscode
 /calculations/.env

@@ -1,14 +1,14 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait IERC677<TContractState> {
+pub trait IERC677<TContractState> {
     fn transfer_and_call(
         ref self: TContractState, to: ContractAddress, value: u256, data: Array<felt252>
     ) -> bool;
 }
 
 #[starknet::interface]
-trait IERC677Receiver<TContractState> {
+pub trait IERC677Receiver<TContractState> {
     fn on_token_transfer(
         ref self: TContractState, sender: ContractAddress, value: u256, data: Array<felt252>
     );
@@ -17,7 +17,7 @@ trait IERC677Receiver<TContractState> {
 }
 
 #[starknet::component]
-mod ERC677Component {
+pub mod ERC677Component {
     use starknet::ContractAddress;
     use openzeppelin::token::erc20::interface::IERC20;
     use array::ArrayTrait;
@@ -32,7 +32,7 @@ mod ERC677Component {
     const IERC677_RECEIVER_ID: u32 = 0xa4c0ed36_u32;
 
     #[storage]
-    struct Storage {}
+    pub struct Storage {}
 
     #[event]
     #[derive(Drop, starknet::Event)]
@@ -41,7 +41,7 @@ mod ERC677Component {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct TransferAndCall {
+    pub struct TransferAndCall {
         #[key]
         from: ContractAddress,
         #[key]

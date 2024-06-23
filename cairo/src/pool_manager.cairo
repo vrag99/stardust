@@ -1,2 +1,2 @@
-mod factory_treasury;
-mod main;
+pub mod factory_treasury;
+pub mod main;

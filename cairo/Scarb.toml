@@ -2,14 +2,16 @@
 name = "stardust"
 version = "0.1.0"
 edition = "2023_11"
-cairo-version= "2.6.3"
+cairo-version = "2.6.3"
 
 [dependencies]
 starknet = "2.6.3"
-openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.10.0" }
-chainlink = {path="./chainlink-starknet/contracts"}
-snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.21.0" }
+chainlink = { path = "./chainlink-starknet/contracts" }
 alexandria_storage = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry.git", tag = "v0.20.0" }
+openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.10.0" }
+argent = {path = "/home/utkarsh/dev/argent-contracts-starknet"}
 
 [[target.starknet-contract]]
-casm=true
+sierra = true
+casm = true

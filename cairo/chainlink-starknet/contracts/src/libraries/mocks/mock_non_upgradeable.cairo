@@ -1,12 +1,12 @@
 #[starknet::interface]
-trait IMockNonUpgradeable<TContractState> {
+pub trait IMockNonUpgradeable<TContractState> {
     fn bar(self: @TContractState) -> bool;
 }
 
 #[starknet::contract]
-mod MockNonUpgradeable {
+pub mod MockNonUpgradeable {
     #[storage]
-    struct Storage {}
+    pub struct Storage {}
 
     #[constructor]
     fn constructor(ref self: ContractState) {}

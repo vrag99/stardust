@@ -17,7 +17,7 @@ use chainlink::libraries::token::erc677::ERC677Component;
 use chainlink::libraries::token::erc677::ERC677Component::ERC677Impl;
 
 #[starknet::interface]
-trait MockInvalidReceiver<TContractState> {
+pub trait MockInvalidReceiver<TContractState> {
     fn set_supports(ref self: TContractState, value: bool);
 }
 

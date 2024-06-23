@@ -1,7 +1,7 @@
 #[starknet::contract]
-mod InvalidReceiver {
+pub mod InvalidReceiver {
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _supports: bool
     }
 

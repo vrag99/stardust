@@ -1,17 +1,17 @@
 use starknet::ContractAddress;
 #[starknet::interface]
-trait MockValidReceiver<TContractState> {
+pub trait MockValidReceiver<TContractState> {
     fn verify(self: @TContractState) -> ContractAddress;
 }
 
 #[starknet::contract]
-mod ValidReceiver {
+pub mod ValidReceiver {
     use starknet::ContractAddress;
     use array::ArrayTrait;
     use chainlink::libraries::token::erc677::IERC677Receiver;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _sender: ContractAddress,
     }
 

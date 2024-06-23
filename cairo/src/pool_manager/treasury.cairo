@@ -5,12 +5,12 @@
 
 use starknet::ContractAddress;
 #[starknet::interface]
-pub trait IProtocolTreasury<TContractState>{
+pub  trait IProtocolTreasury<TContractState>{
     fn make_trade(ref self:TContractState,amountInCollateral:u128,amountOutCollateral:ContractAddress,collateral:ContractAddress,to:ContractAddress , fee:u128);
 }
 
 #[starknet::interface]
-pub trait IAggregatorPriceConsumer<TContractState> {
+pub  trait IAggregatorPriceConsumer<TContractState> {
     fn get_latest_price(self: @TContractState) -> u128;
 }
 
@@ -18,7 +18,7 @@ pub trait IAggregatorPriceConsumer<TContractState> {
 
 
 #[starknet::interface]
-trait IERC20<TContractState> {
+pub trait IERC20<TContractState> {
     fn name(self: @TContractState) -> felt252;
 
     fn symbol(self: @TContractState) -> felt252;
@@ -42,7 +42,7 @@ trait IERC20<TContractState> {
 
 
 #[starknet::contract]
-pub mod Treasury{
+pub  mod Treasury{
     use starknet::ContractAddress;
     use alexandria_storage::{List,ListTrait};
     use super::IERC20Dispatcher;
@@ -51,7 +51,7 @@ pub mod Treasury{
     use starknet::get_contract_address;
 
     #[storage]
-    struct Storage{
+    pub struct Storage{
         pool_id:u128,
         protocol_proxy:ContractAddress, // This for the treasury owner
         totalFees:u128,

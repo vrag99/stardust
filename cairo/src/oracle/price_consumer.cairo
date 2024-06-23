@@ -4,7 +4,7 @@ pub trait IAggregatorPriceConsumer<TContractState> {
 }
 
 #[starknet::contract]
-mod AggregatorPriceConsumer {
+pub mod AggregatorPriceConsumer {
     use starknet::ContractAddress;
 
 
@@ -13,7 +13,7 @@ mod AggregatorPriceConsumer {
     use chainlink::ocr2::aggregator_proxy::IAggregatorDispatcher;
     use chainlink::ocr2::aggregator_proxy::IAggregatorDispatcherTrait;
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _uptime_feed_address: ContractAddress,
         _aggregator_address: ContractAddress,
     }

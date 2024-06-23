@@ -1,14 +1,14 @@
 #[starknet::interface]
-trait ICounter<T> {
+pub trait ICounter<T> {
     fn get_counter(self: @T) -> u32;
     fn increase_counter(ref self: T);
 }
 
 
 #[starknet::contract]
-mod Counter {
+pub mod Counter {
     #[storage]
-    struct Storage {
+    pub struct Storage {
         counter: u32
     }
 
@@ -19,7 +19,7 @@ mod Counter {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct CounterIncreased {
+    pub struct CounterIncreased {
         counter: u32
     }
 

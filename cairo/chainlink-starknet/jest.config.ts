@@ -24,7 +24,7 @@ const config: Config.InitialOptions = {
   testPathIgnorePatterns: ['dist/', 'node_modules/'],
   projects: [
     projectConfig('starknet-gauntlet'),
-    projectConfig('starknet-gauntlet-argent'),
+    projectConfig('starknet-gauntlet-stardust'),
     projectConfig('starknet-gauntlet-cli'),
     projectConfig('starknet-gauntlet-example'),
     projectConfig('starknet-gauntlet-multisig'),

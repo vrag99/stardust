@@ -31,7 +31,7 @@ fn _assert_unique_values_loop<
 }
 
 #[derive(Copy, Drop, Serde, starknet::Store)]
-struct Transaction {
+pub struct Transaction {
     to: ContractAddress,
     function_selector: felt252,
     calldata_len: usize,
@@ -40,7 +40,7 @@ struct Transaction {
 }
 
 #[starknet::interface]
-trait IMultisig<TContractState> {
+pub trait IMultisig<TContractState> {
     fn is_signer(self: @TContractState, address: ContractAddress) -> bool;
     fn get_signers_len(self: @TContractState) -> usize;
     fn get_signers(self: @TContractState) -> Array<ContractAddress>;
@@ -66,7 +66,7 @@ trait IMultisig<TContractState> {
 }
 
 #[starknet::contract]
-mod Multisig {
+pub mod Multisig {
     use super::assert_unique_values;
     use super::{Transaction};
 
@@ -106,7 +106,7 @@ mod Multisig {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct TransactionSubmitted {
+    pub struct TransactionSubmitted {
         #[key]
         signer: ContractAddress,
         #[key]
@@ -116,7 +116,7 @@ mod Multisig {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct TransactionConfirmed {
+    pub struct TransactionConfirmed {
         #[key]
         signer: ContractAddress,
         #[key]
@@ -124,7 +124,7 @@ mod Multisig {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct ConfirmationRevoked {
+    pub struct ConfirmationRevoked {
         #[key]
         signer: ContractAddress,
         #[key]
@@ -132,7 +132,7 @@ mod Multisig {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct TransactionExecuted {
+    pub struct TransactionExecuted {
         #[key]
         executor: ContractAddress,
         #[key]
@@ -140,19 +140,19 @@ mod Multisig {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct SignersSet {
+    pub struct SignersSet {
         #[key]
         signers: Array<ContractAddress>
     }
 
     #[derive(Drop, starknet::Event)]
-    struct ThresholdSet {
+    pub struct ThresholdSet {
         #[key]
         threshold: usize
     }
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _threshold: usize,
         _signers: LegacyMap<usize, ContractAddress>,
         _is_signer: LegacyMap<ContractAddress, bool>,
@@ -345,7 +345,7 @@ mod Multisig {
             // TODO: this shouldn't be necessary. call_contract_syscall returns a Span<felt252>, which
             // is a serialized result, but returning a Span<felt252> results in an error:
             //
-            // Trait has no implementation in context: core::serde::Serde::<core::array::Span::<core::felt252>>
+            // pub trait has no implementation in context: core::serde::Serde::<core::array::Span::<core::felt252>>
             //
             // Cairo docs also have an example that returns a Span<felt252>:
             // https://github.com/starkware-libs/cairo/blob/fe425d0893ff93a936bb3e8bbbac771033074bdb/docs/reference/src/components/cairo/modules/language_constructs/pages/contracts.adoc#L226

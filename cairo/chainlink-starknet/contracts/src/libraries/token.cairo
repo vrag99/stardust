@@ -1,1 +1,1 @@
-mod erc677;
+pub mod erc677;

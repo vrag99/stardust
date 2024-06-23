@@ -1,1 +1,1 @@
-mod access_controller;
+pub mod access_controller;

@@ -20,13 +20,13 @@ pub trait ICollateralManager<T>{
 
 
 #[starknet::contract]
-mod CollateralManager {
+pub mod CollateralManager {
     use super::IVaultDispatcherTrait;
     use super::IVaultDispatcher;
     use starknet::{ContractAddress,get_caller_address}; 
     use super::ICollateralManager;
     #[storage]
-    struct Storage{
+    pub struct Storage{
         //total collateral deposited
         totalValue: u128,
         // the collateral deposited by each asset

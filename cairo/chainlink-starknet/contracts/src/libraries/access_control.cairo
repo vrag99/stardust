@@ -1,6 +1,6 @@
 use starknet::ContractAddress;
 #[starknet::interface]
-trait IAccessController<TContractState> {
+pub trait IAccessController<TContractState> {
     fn has_access(self: @TContractState, user: ContractAddress, data: Array<felt252>) -> bool;
     fn has_read_access(self: @TContractState, user: ContractAddress, data: Array<felt252>) -> bool;
     fn add_access(ref self: TContractState, user: ContractAddress);
@@ -11,7 +11,7 @@ trait IAccessController<TContractState> {
 
 // Requires Ownable subcomponent.
 #[starknet::component]
-mod AccessControlComponent {
+pub mod AccessControlComponent {
     use starknet::ContractAddress;
     use starknet::class_hash::ClassHash;
     use zeroable::Zeroable;
@@ -21,7 +21,7 @@ mod AccessControlComponent {
     use OwnableComponent::InternalImpl as OwnableInternalImpl;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _check_enabled: bool,
         _access_list: LegacyMap<ContractAddress, bool>,
     }
@@ -36,22 +36,22 @@ mod AccessControlComponent {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct AddedAccess {
+    pub struct AddedAccess {
         #[key]
         user: ContractAddress
     }
 
     #[derive(Drop, starknet::Event)]
-    struct RemovedAccess {
+    pub struct RemovedAccess {
         #[key]
         user: ContractAddress
     }
 
     #[derive(Drop, starknet::Event)]
-    struct AccessControlEnabled {}
+    pub struct AccessControlEnabled {}
 
     #[derive(Drop, starknet::Event)]
-    struct AccessControlDisabled {}
+    pub struct AccessControlDisabled {}
 
     #[embeddable_as(AccessControlImpl)]
     impl AccessControl<

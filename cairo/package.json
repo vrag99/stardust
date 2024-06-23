@@ -2,7 +2,8 @@
   "name": "counter-workshop",
   "private": "true",
   "scripts": {
-    "deploy": "ts-node scripts/deploy.ts"
+    "deploy": "ts-node scripts/deploy.ts",
+    "deploy:governance": "ts-node scripts/deploy-governance.ts"
   },
   "dependencies": {
     "@tsconfig/node21": "21.0.1",

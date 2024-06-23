@@ -66,7 +66,7 @@ use chainlink::libraries::access_control::{
 };
 
 #[starknet::interface]
-trait ILinkToken<TState> {}
+pub trait ILinkToken<TState> {}
 
 fn STATE() -> Aggregator::ContractState {
     Aggregator::contract_state_for_testing()

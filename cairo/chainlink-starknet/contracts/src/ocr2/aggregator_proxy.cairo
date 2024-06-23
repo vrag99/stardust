@@ -4,7 +4,7 @@ use starknet::ContractAddress;
 
 // TODO: use a generic param for the round_id?
 #[starknet::interface]
-trait IAggregatorProxy<TContractState> {
+pub trait IAggregatorProxy<TContractState> {
     fn latest_round_data(self: @TContractState) -> Round;
     fn round_data(self: @TContractState, round_id: felt252) -> Round;
     fn description(self: @TContractState) -> felt252;
@@ -13,7 +13,7 @@ trait IAggregatorProxy<TContractState> {
 }
 
 #[starknet::interface]
-trait IAggregatorProxyInternal<TContractState> {
+pub trait IAggregatorProxyInternal<TContractState> {
     fn propose_aggregator(ref self: TContractState, address: ContractAddress);
     fn confirm_aggregator(ref self: TContractState, address: ContractAddress);
     fn proposed_latest_round_data(self: @TContractState) -> Round;
@@ -23,7 +23,7 @@ trait IAggregatorProxyInternal<TContractState> {
 }
 
 #[starknet::contract]
-mod AggregatorProxy {
+pub mod AggregatorProxy {
     use super::IAggregatorProxy;
     use super::IAggregatorDispatcher;
     use super::IAggregatorDispatcherTrait;
@@ -63,7 +63,7 @@ mod AggregatorProxy {
     const MAX_ID: felt252 = 0xffffffffffffffffffffffffffffffff;
 
     #[derive(Copy, Drop, Serde, starknet::Store)]
-    struct Phase {
+    pub struct Phase {
         id: u128,
         aggregator: ContractAddress
     }
@@ -81,7 +81,7 @@ mod AggregatorProxy {
     impl AccessControlInternalImpl = AccessControlComponent::InternalImpl<ContractState>;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         #[substorage(v0)]
         ownable: OwnableComponent::Storage,
         #[substorage(v0)]

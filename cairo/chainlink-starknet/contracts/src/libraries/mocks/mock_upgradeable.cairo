@@ -1,19 +1,19 @@
 use starknet::class_hash::ClassHash;
 
 #[starknet::interface]
-trait IMockUpgradeable<TContractState> {
+pub trait IMockUpgradeable<TContractState> {
     fn foo(self: @TContractState) -> bool;
     fn upgrade(ref self: TContractState, new_impl: ClassHash);
 }
 
 #[starknet::contract]
-mod MockUpgradeable {
+pub mod MockUpgradeable {
     use starknet::class_hash::ClassHash;
 
     use chainlink::libraries::upgradeable::Upgradeable;
 
     #[storage]
-    struct Storage {}
+    pub struct Storage {}
 
     #[constructor]
     fn constructor(ref self: ContractState) {}

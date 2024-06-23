@@ -7,7 +7,7 @@ pub trait IAggregatorConsumer<TContractState> {
 }
 
 #[starknet::contract]
-mod AggregatorConsumer {
+pub mod AggregatorConsumer {
     use starknet::ContractAddress;
 
     use chainlink::ocr2::aggregator::Round;
@@ -17,7 +17,7 @@ mod AggregatorConsumer {
     use chainlink::ocr2::aggregator_proxy::IAggregatorDispatcherTrait;
 
     #[storage]
-    struct Storage {
+    pub struct Storage {
         _ocr_address: ContractAddress,
         _answer: u128,
     }

@@ -72,7 +72,7 @@ Welcome to the Internals page of Stardust, where we delve into the technical wor
 <br />
 <img src="/ui/images/5.jpeg ">
 <br/>
-<img src="/ui/images/6.jpeg ">
+<img src="/ui/images/8.jpeg ">
 
 
 - **Frontend Development:**

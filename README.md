@@ -16,16 +16,16 @@
   <p align="center" style="width:76ch;">
 Welcome to Stardust .
 Designed to streamline your operations and finances, StableStore offers a comprehensive suite of tools to manage your storage deals and monitor your performance.</p>
-    <a href="https://stablestore.gitbook.io/stablestore">View Docs</a>
+    <a href="https://stardust.gitbook.io/stardust">View Docs</a>
     ·
-    <a href="https://github.com/Sahilgill24/StableStore/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/vrag99/stardust/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/Sahilgill24/StableStore/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/vrag99/stardust/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
 ## Get Started
-<a href="https://stablestore.gitbook.io/stablestore"><strong>Explore the docs »</strong></a>
+<a href="https://stardust.gitbook.io/stardust"><strong>Explore the docs »</strong></a>
 1.  Clone the repo
     ```sh
     git clone https://github.com/Sahilgill24/StableStore.git && cd StableStore

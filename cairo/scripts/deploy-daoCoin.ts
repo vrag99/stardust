@@ -15,11 +15,12 @@ async function main() {
   const accountAddress0: string = process.env.DEPLOYER_ADDRESS ?? "";
   const account0 = new Account(provider, accountAddress0, privateKey0);
   console.log("Account connected.\n");
+
   // Declare & deploy contract
   let sierraCode, casmCode;
 
   try {
-    ({ sierraCode, casmCode } = await getCompiledCode("stardust_DaoFactory"));
+    ({ sierraCode, casmCode } = await getCompiledCode("stardust_veStar"));
   } catch (error: any) {
     console.log("Failed to read contract files");
     process.exit(1);
@@ -27,8 +28,6 @@ async function main() {
 
   const myCallData = new CallData(sierraCode.abi);
   const constructor = myCallData.compile("constructor", {
-    class_hash: "0x0198ad5ff07ff4602dd257b066a19dd15ec1712dc0d48cf9be9c26157217cc21",
-    init_value:"0x068364fDE241623D21cF4CeB61d0B77EfD3c081B0e6c784b8dCAAbaCAA28cde4"
   });
   const deployResponse = await account0.declareAndDeploy({
     contract: sierraCode,
@@ -53,6 +52,5 @@ main()
     console.error(error);
     process.exit(1);
   });
-
 
 

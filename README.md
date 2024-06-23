@@ -116,12 +116,14 @@ Explanation of dynamic collateralization used on our platform
 <br />
 <img src="/ui/images/2.jpeg ">
 <br />
-<img src="/ui/images/3.jpeg ">
-<br />
 <img src="/ui/images/4.jpeg ">
+<br />
+<img src="/ui/images/3.jpeg ">
 <br />
 
 After plotting the curve on desmos it looks something like this and here we can see the movement of the curve , we can adjust this by using any constant as normalization factor 
+
+
 <br/>
 <img src="/ui/images/image.png">
 

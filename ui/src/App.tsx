@@ -4,8 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/home";
 import ProtocolDashboard from "@/pages/protocol-dashboard";
 import LiquidityDashboard from "@/pages/liquidity-dashboard";
-import Dao from "./pages/dao-interface";
+import ReputationDashboard from "./pages/reputation-dashboard";
+import Dao from "@/pages/dao-interface";
+
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
+import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { StarknetWalletConnectors } from "@dynamic-labs/starknet";
 import { createConfig, WagmiProvider } from "wagmi";
@@ -37,14 +40,26 @@ function App() {
       >
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
-            <Router>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/protocol-dashboard" element={<ProtocolDashboard />} />
-                <Route path="/liquidity-dashboard" element={<LiquidityDashboard />} />
-                <Route path="/dao" element={<Dao />} />
-              </Routes>
-            </Router>
+            <DynamicWagmiConnector>
+              <Router>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route
+                    path="/protocol-dashboard"
+                    element={<ProtocolDashboard />}
+                  />
+                  <Route
+                    path="/liquidity-dashboard"
+                    element={<LiquidityDashboard />}
+                  />
+                  <Route
+                    path="/reputation-dashboard"
+                    element={<ReputationDashboard />}
+                  />
+                  <Route path="/dao" element={<Dao />} />
+                </Routes>
+              </Router>
+            </DynamicWagmiConnector>
           </QueryClientProvider>
         </WagmiProvider>
       </DynamicContextProvider>

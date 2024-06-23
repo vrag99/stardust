@@ -1,8 +1,6 @@
 import { GradientHeading } from "@/components/ui/gradient-heading";
 import Meteors from "@/components/ui/meteors";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
-import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
-import { useAccount } from "wagmi";
 
 export default function Home() {
   return (
@@ -28,22 +26,9 @@ export default function Home() {
         </span>
       </p>
       <div className="mt-2">
-        <DynamicWagmiConnector>
-          <DynamicWidget />
-        </DynamicWagmiConnector>
+        <DynamicWidget />
       </div>
     </div>
   );
 }
 
-function AccountInfo() {
-  const { address, isConnected, chain } = useAccount();
-
-  return (
-    <div>
-      <p>wagmi connected: {isConnected ? "true" : "false"}</p>
-      <p>wagmi address: {address}</p>
-      <p>wagmi network: {chain?.id}</p>
-    </div>
-  );
-}

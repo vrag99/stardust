@@ -44,7 +44,7 @@ async function main() {
     provider
   );
   console.log(
-    `✅ Contract has been deploy with the address: ${myTestContract.address}`
+    `Contract has been deploy with the address: ${myTestContract.address}`
   );
 }
 main()
